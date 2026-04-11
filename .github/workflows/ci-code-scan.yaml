@@ -1,0 +1,9 @@
+name: ci-code-scan
+
+on:
+  workflow_call:
+    inputs:
+      workdir:
+        required: true
+        type: string
+        description: "project working directory"

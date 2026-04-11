@@ -1,0 +1,9 @@
+name: ci-docker-publish
+
+on:
+  workflow_call:
+    inputs:
+      workdir:
+        required: true
+        type: string
+        description: "project working directory"
