@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres_db_js
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: api_db_js
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_js:/var/lib/postgresql/data
+    networks:
+      - api_js_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_js
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - api_js_network
+
+  api:
+    build: .
+    container_name: api_node_js
+    environment:
+      DB_HOST: postgres_db_js
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: api_db_js
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - api_js_network
+
+volumes:
+  postgres_data_js:
+
+networks:
+  api_js_network:
+    driver: bridge
