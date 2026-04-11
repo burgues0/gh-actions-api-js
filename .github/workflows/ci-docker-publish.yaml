@@ -7,3 +7,10 @@ on:
         required: true
         type: string
         description: "project working directory"
+
+jobs:
+  docker-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v6
