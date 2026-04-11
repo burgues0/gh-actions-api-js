@@ -22,6 +22,7 @@ jobs:
         with:
           projectBaseDir: ${{ inputs.workdir }}
           args: >
-            -Dsonar.organization=burguesia
+            -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
