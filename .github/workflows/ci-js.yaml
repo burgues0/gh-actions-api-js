@@ -11,7 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    working-directory: ${{ inputs.workdir }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.workdir }}
     steps:
       - name: checkout repo
         uses: actions/checkout@v6
