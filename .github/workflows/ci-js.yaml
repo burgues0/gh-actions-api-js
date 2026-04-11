@@ -8,13 +8,10 @@ on:
         type: string
         description: "project working directory"
 
-defaults:
-  run:
-    working-directory: ${{ inputs.workdir }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    working-directory: ${{ inputs.workdir }}
     steps:
       - name: checkout repo
         uses: actions/checkout@v6
