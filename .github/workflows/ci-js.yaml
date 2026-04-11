@@ -16,9 +16,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
-        uses: actions/checkout@latest
-
       - name: node setup
         uses: actions/setup-node@latest
         with:

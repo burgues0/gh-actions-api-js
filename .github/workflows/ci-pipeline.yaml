@@ -13,13 +13,16 @@ jobs:
   ci-js:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@latest
+
       - name: Call JS Build Workflow
-        uses: ./github/workflow/ci-js.yaml
+        uses: ./github/workflows/ci-js.yaml
         with:
           workdir: ./api-js
 
       - name: Call JS Code Scan Workflow
-        uses: ./github/workflow/ci-code-scan.yaml
+        uses: ./github/workflows/ci-code-scan.yaml
 
   ci-docker:
     runs-on: ubuntu-latest
