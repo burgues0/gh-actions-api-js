@@ -7,6 +7,9 @@ on:
         required: true
         type: string
         description: "project working directory"
+    secrets:
+      SONAR_TOKEN:
+        required: true
 
 jobs:
   code-scan:
@@ -19,10 +22,10 @@ jobs:
 
       - name: sonarcloud scan
         uses: SonarSource/sonarqube-scan-action@v7.1.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ${{ inputs.workdir }}
           args: >
             -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
