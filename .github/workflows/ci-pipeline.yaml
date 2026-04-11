@@ -18,7 +18,11 @@ jobs:
   ci-code-scan:
     uses: ./.github/workflows/ci-code-scan.yaml
     needs: ci-js
+    with:
+      workdir: ./api-js
 
   ci-docker:
     uses: ./.github/workflows/ci-docker-publish.yaml
     needs: ci-code-scan
+    with:
+      workdir: .
