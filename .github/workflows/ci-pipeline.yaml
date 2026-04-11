@@ -28,3 +28,5 @@ jobs:
     needs: ci-code-scan
     with:
       workdir: .
+    secrets:
+      SONAR_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
