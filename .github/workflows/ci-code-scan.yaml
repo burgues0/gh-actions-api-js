@@ -12,7 +12,7 @@ on:
         required: true
 
 jobs:
-  code-scan:
+  sonarcloud-scan:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
@@ -29,3 +29,15 @@ jobs:
           args: >
             -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+
+  semgrep-scan:
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v6
+
+      - name: run scan
+        run: semgrep scan --config auto
