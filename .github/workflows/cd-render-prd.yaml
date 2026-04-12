@@ -1,0 +1,22 @@
+name: cd-render-prd
+
+on:
+  workflow_call:
+    inputs:
+      service_url:
+        required: true
+        type: string
+        description: "url de acesso no render"
+    secrets:
+      RENDER_DEPLOY_HOOK:
+        required: true
+
+jobs:
+  cd-prod:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ inputs.service_url }}
+    steps:
+      - name: render deploy prod
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

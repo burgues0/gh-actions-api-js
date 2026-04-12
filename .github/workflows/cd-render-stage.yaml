@@ -1,0 +1,35 @@
+name: cd-render-stage
+
+on:
+  workflow_call:
+    inputs:
+      service_url:
+        required: true
+        type: string
+        description: "url de acesso no render"
+    secrets:
+      RENDER_DEPLOY_HOOK:
+        required: true
+
+jobs:
+  cd-stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: render deploy stage
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+  dast-scan:
+    runs-on: ubuntu-latest
+    needs: cd-stage
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v6
+
+      - name: fix permissions
+        run: chmod -R 777
+
+      - name: owasp zap
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: ${{ inputs.service_url }}
+          fail_action: true

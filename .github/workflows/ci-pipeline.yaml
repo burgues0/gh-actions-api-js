@@ -30,3 +30,19 @@ jobs:
       workdir: .
     secrets:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  cd-render-stage:
+    uses: ./.github/workflows/cd-render-stage.yaml
+    needs: ci-docker
+    with:
+      service_url: "https://gh-actions-api-js.onrender.com"
+    secrets:
+      RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+  cd-render-prd:
+    uses: ./.github/workflows/cd-render-prd.yaml
+    needs: cd-render-stage
+    with:
+      service_url: "https://gh-actions-api-js.onrender.com"
+    secrets:
+      RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
