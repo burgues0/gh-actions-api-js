@@ -29,4 +29,4 @@ jobs:
     with:
       workdir: .
     secrets:
-      SONAR_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

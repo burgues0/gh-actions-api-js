@@ -11,13 +11,12 @@ on:
       DOCKERHUB_TOKEN:
         required: true
 
-defaults:
-  run:
-    working-directory: ${{ inputs.workdir }}
-
 jobs:
   docker-lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.workdir }}
     steps:
       - name: checkout repo
         uses: actions/checkout@v6
