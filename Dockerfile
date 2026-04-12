@@ -1,13 +1,24 @@
-FROM node:25-alpine3.22
+FROM golang:1.20-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY go.mod ./
+COPY go.sum ./
 
-RUN npm install && npm audit fix --force
+RUN go mod download
 
-COPY ./api-js/ .
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+COPY --from=builder /app/main .
 
 EXPOSE 3000
 
-CMD ["node", "index.js"]
+CMD ["./main"]

@@ -1,18 +1,15 @@
 # 🚀 API em Go
 
 ## 📌 Sobre o Projeto
-API simples desenvolvida em JS como forma de treinamento para criação do dockerfile, compose e ci/cd
+API simples desenvolvida em GO como forma de treinamento para criação do dockerfile, compose e ci/cd
 
 Pré-requisitos
-- Node instalado
+- Go instalado (>= 1.20)
 
 Passo a passo
-- cd api-js
-- npm i
-- Configurar o Banco de dados
-  - Arquivo database.js
-  - Configurar arquivo .env
-- node index.js
+- cd api-go
+- go mod tidy
+- go run main.go
 
 A API estará disponível em:
 - http://localhost:3000
@@ -23,23 +20,27 @@ Você deverá criar um Dockerfile para essa aplicação
 
 ### Requisitos:
 
-- Utilizar imagem oficial do Node
+- Utilizar imagem oficial do Go
 - Build da aplicação
+- Usar multi-stage build
 - Expor porta 3000
 - Executar a API
 
 
 ## 🐳 (Atividade 2) Rodando com Compose
 
-Você deverá modificar a aplicação para fazer acesso ao banco de dados. Crie um docker compose para executar o PostreSQL, o PGAdmin e a aplicação em Node atraves do dockerfile que você criou
+Você deverá modificar a aplicação para fazer acesso ao banco de dados. Crie um docker compose para executar o PostreSQL, o PGAdmin e a aplicação em GO atraves do dockerfile que você criou
 
 ### Requisitos:
 
 - Utilizar o dockerfile criado na atividade 1
 - Criar um docker compose com:
-  - A aplicação em Node
+  - A aplicação em go
   - O banco PostgreSQL
   - O PGAdmin
+
+
+
 
 ## ⚙️ (DESAFIO) CI/CD
 
