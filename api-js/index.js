@@ -1,10 +1,12 @@
 import express from 'express';
+import helmet from 'helmet';
 import router from './router.js';
 import db from './database.js';
 
 const app = express();
 const port = 3000;
 
+app.use(helmet());
 app.use(express.json());
 app.use('/', router);
 
