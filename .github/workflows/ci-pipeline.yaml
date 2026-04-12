@@ -3,7 +3,7 @@ name: ci-pipeline
 on:
   push:
     branches:
-      - main
+      - release/go
 
 concurrency:
   group: build-${{ github.ref }}
@@ -11,15 +11,15 @@ concurrency:
 
 jobs:
   ci-js:
-    uses: ./.github/workflows/ci-js.yaml
+    uses: ./.github/workflows/ci-go.yaml
     with:
-      workdir: ./api-js
+      workdir: ./api-go
 
   ci-code-scan:
     uses: ./.github/workflows/ci-code-scan.yaml
-    needs: ci-js
+    needs: ci-go
     with:
-      workdir: ./api-js
+      workdir: ./api-go
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
