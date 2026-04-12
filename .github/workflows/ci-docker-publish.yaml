@@ -51,8 +51,9 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dockerhub-images:latest
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dockerhub-images:${{ github.sha }}
+          tags:
+            - ${{ secrets.DOCKERHUB_USERNAME }}/dockerhub-images:latest
+            - ${{ secrets.DOCKERHUB_USERNAME }}/dockerhub-images:${{ github.sha }}
 
       - name: run trivy vuln scan
         uses: aquasecurity/trivy-action@0.33.1
