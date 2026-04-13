@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci-js:
+  ci-go:
     uses: ./.github/workflows/ci-go.yaml
     with:
       workdir: ./api-go
