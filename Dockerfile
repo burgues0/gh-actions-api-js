@@ -6,9 +6,9 @@ COPY api-go/go.mod .
 
 RUN go mod download
 
-COPY . .
+COPY api-go/. .
 
-RUN go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 FROM alpine:3.23
 
